@@ -1,9 +1,10 @@
 import fs from "fs-extra";
 import { spawn } from "child_process";
 import path from "path";
+import { __dirname } from './dist/global.js'
 
 // run package.json scripts faster
-const packageJsonPath = path.join(process.cwd(), 'package.json');
+const packageJsonPath = path.join(__dirname, '..', 'package.json');
 if (!fs.existsSync(packageJsonPath)) {
   console.error('package.json not found in the current directory.');
   process.exit(1);

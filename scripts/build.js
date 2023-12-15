@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 // build src dir into dist using swc
 const addRootPath = (_path = '') => {
   if (_path === '' && !_path) throw 'no path specified on `addRootPath`';
-  return join(process.cwd(), _path);
+  return join(__dirname, '..', _path);
 }
 const logError = (condition = false, message = '') => {
   if(condition) {
