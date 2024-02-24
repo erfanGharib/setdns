@@ -1,13 +1,13 @@
 {
   "name": "setdns",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "node dist/index",
-    "build": "node scripts/build",
-    "build:w": "node scripts/build --watch",
+    "start": "set NODE_ENV=development && node dist/index",
+    "build": "node scripts/build.cjs",
+    "build:w": "node scripts/build.cjs --watch",
     "start:w": "nodemon --exec \"node dist/index\""
   },
   "bin": {

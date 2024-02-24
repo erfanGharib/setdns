@@ -6,7 +6,7 @@ import { runCli } from "./cli.js";
 import { __dirname } from "./global.js";
 
 const checkPrivilege = () => {
-    new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         const command = "net session";
 
         exec(command, (err, stdout) => {
@@ -14,8 +14,8 @@ const checkPrivilege = () => {
                 err ||
                 !(stdout.indexOf("There are no entries in the list.") > -1)
             ) {
-                console.log("Run command as administrator");
-                process.exit(1);
+                reject("Run command as administrator");
+                return;
             }
             resolve("");
         });
@@ -29,10 +29,15 @@ const checkOS = () => {
     }
 }
 
-;(function () {
+;(async function () {
     process.title = "setdns";
 
     checkOS();
-    checkPrivilege();
-    runCli();
+    try {
+        await checkPrivilege();
+    } catch(err) {
+        console.log(err);
+        process.exit();
+    }
+    await runCli();
 })();
