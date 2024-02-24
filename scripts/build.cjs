@@ -1,10 +1,11 @@
-import { join } from "path";
-import fs from 'fs-extra'
-
+// import { join } from "path";
+// import fs from 'fs-extra'
+const path = require('path')
+const fs = require('fs-extra')
 // build src dir into dist using swc
 const addRootPath = (_path = '') => {
   if (_path === '' && !_path) throw 'no path specified on `addRootPath`';
-  return join(__dirname, '..', _path);
+  return path.join(__dirname, '..', _path);
 }
 const logError = (condition = false, message = '') => {
   if(condition) {
@@ -28,5 +29,5 @@ const logError = (condition = false, message = '') => {
   swcOpts.forEach((opt) => {
     process.argv.push(opt)
   });
-  await import('../node_modules/@swc/cli/bin/swc.js');
+  require('../node_modules/@swc/cli/bin/swc.js');
 })()
